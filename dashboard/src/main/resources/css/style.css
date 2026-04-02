@@ -1,0 +1,164 @@
+.root {
+    -fx-background-color: #121212;
+    -fx-font-family: "Segoe UI", Arial, sans-serif;
+}
+
+.panel {
+    -fx-background-color: #1E1E1E;
+    -fx-border-color: #333333;
+    -fx-border-radius: 5;
+    -fx-background-radius: 5;
+    -fx-padding: 15;
+}
+
+.metric-card {
+    -fx-background-color: #252526;
+    -fx-border-color: #3e3e42;
+    -fx-border-radius: 8;
+    -fx-background-radius: 8;
+    -fx-min-width: 150;
+    -fx-alignment: center;
+    -fx-padding: 15;
+}
+
+.metric-title {
+    -fx-text-fill: #AAAAAA;
+    -fx-font-size: 14px;
+}
+
+.metric-value {
+    -fx-text-fill: #FFFFFF;
+    -fx-font-size: 24px;
+    -fx-font-weight: bold;
+}
+
+.metric-value-danger {
+    -fx-text-fill: #FF5252;
+    -fx-font-size: 24px;
+    -fx-font-weight: bold;
+}
+
+.header-title {
+    -fx-text-fill: #E0E0E0;
+    -fx-font-size: 22px;
+    -fx-font-weight: bold;
+}
+
+.section-title {
+    -fx-text-fill: #CCCCCC;
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-padding: 0 0 10 0;
+}
+
+.button {
+    -fx-background-color: #007ACC;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-cursor: hand;
+    -fx-background-radius: 4;
+}
+
+.button:hover {
+    -fx-background-color: #0098FF;
+}
+
+.button-danger {
+    -fx-background-color: #D32F2F;
+}
+
+.button-danger:hover {
+    -fx-background-color: #F44336;
+}
+
+.text-field, .combo-box {
+    -fx-background-color: #2D2D30;
+    -fx-text-fill: white;
+    -fx-prompt-text-fill: #888888;
+    -fx-border-color: #3E3E42;
+    -fx-border-radius: 3;
+    -fx-background-radius: 3;
+}
+
+/* Table styling for Dark Mode */
+.table-view {
+    -fx-background-color: transparent;
+    -fx-border-color: #333333;
+}
+.table-view .column-header-background {
+    -fx-background-color: #252526;
+}
+.table-view .column-header, .table-view .filler {
+    -fx-size: 35;
+    -fx-border-width: 0 0 1 0;
+    -fx-border-color: #333333;
+    -fx-background-color: transparent;
+}
+.table-view .column-header .label {
+    -fx-text-fill: #CCCCCC;
+    -fx-font-weight: bold;
+}
+.table-view .table-cell {
+    -fx-text-fill: #E0E0E0;
+    -fx-border-color: transparent;
+}
+.table-row-cell {
+    -fx-background-color: #1E1E1E;
+    -fx-border-width: 0 0 1 0;
+    -fx-border-color: #2D2D30;
+}
+.table-row-cell:odd {
+    -fx-background-color: #252526;
+}
+
+/* Custom Row Colors injected from Controller logic */
+.row-anomalous {
+    -fx-background-color: rgba(211, 47, 47, 0.25) !important;
+}
+.row-anomalous:hover {
+    -fx-background-color: rgba(211, 47, 47, 0.4) !important;
+}
+
+.row-suspicious {
+    -fx-background-color: rgba(255, 152, 0, 0.2) !important;
+}
+.row-suspicious:hover {
+    -fx-background-color: rgba(255, 152, 0, 0.4) !important;
+}
+
+.row-normal {
+    -fx-background-color: rgba(76, 175, 80, 0.1) !important;
+}
+.row-normal:hover {
+    -fx-background-color: rgba(76, 175, 80, 0.25) !important;
+}
+
+/* Charts Dark Mode */
+.chart {
+    -fx-padding: 10px;
+}
+.chart-content {
+    -fx-padding: 10px;    
+}
+.chart-title {
+    -fx-text-fill: #E0E0E0;
+    -fx-font-size: 14px;
+}
+.axis {
+    -fx-tick-label-fill: #AAAAAA;
+}
+.axis-label {
+    -fx-text-fill: #AAAAAA;
+}
+.chart-plot-background {
+    -fx-background-color: #1E1E1E;
+}
+.chart-vertical-grid-lines, .chart-horizontal-grid-lines {
+    -fx-stroke: #333333;
+}
+.chart-legend {
+    -fx-background-color: transparent;
+}
+.chart-legend-item {
+    -fx-text-fill: #CCCCCC;
+}

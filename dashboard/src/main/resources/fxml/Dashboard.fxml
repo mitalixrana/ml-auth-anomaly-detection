@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.chart.*?>
+<?import javafx.geometry.Insets?>
+
+<BorderPane xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.security.dashboard.controller.DashboardController" stylesheets="@../css/style.css">
+    
+    <!-- TOP HEADER & METRICS -->
+    <top>
+        <VBox spacing="15" styleClass="panel" BorderPane.alignment="CENTER">
+            <BorderPane.margin>
+                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+            </BorderPane.margin>
+            
+            <HBox alignment="CENTER_LEFT" spacing="20">
+                <Label text="Security Operations Center (SOC) Console" styleClass="header-title" HBox.hgrow="ALWAYS"/>
+                <Region HBox.hgrow="ALWAYS" />
+                <Button text="Simulate Attack" onAction="#simulateAttack" styleClass="button, button-danger"/>
+                <Button text="Refresh Data" onAction="#fetchData" styleClass="button"/>
+            </HBox>
+            
+            <HBox spacing="15" alignment="CENTER">
+                <VBox styleClass="metric-card">
+                    <Label text="Total Attempts" styleClass="metric-title"/>
+                    <Label fx:id="lblTotalLogins" text="0" styleClass="metric-value"/>
+                </VBox>
+                <VBox styleClass="metric-card">
+                    <Label text="Successful" styleClass="metric-title"/>
+                    <Label fx:id="lblSuccess" text="0" styleClass="metric-value" style="-fx-text-fill: #4CAF50;"/>
+                </VBox>
+                <VBox styleClass="metric-card">
+                    <Label text="Failed" styleClass="metric-title"/>
+                    <Label fx:id="lblFailed" text="0" styleClass="metric-value" style="-fx-text-fill: #FF9800;"/>
+                </VBox>
+                <VBox styleClass="metric-card">
+                    <Label text="Anomalies" styleClass="metric-title"/>
+                    <Label fx:id="lblAnomalies" text="0" styleClass="metric-value-danger"/>
+                </VBox>
+                <VBox styleClass="metric-card">
+                    <Label text="Suspicious IPs" styleClass="metric-title"/>
+                    <Label fx:id="lblSuspiciousIps" text="0" styleClass="metric-value" style="-fx-text-fill: #FF9800;"/>
+                </VBox>
+            </HBox>
+        </VBox>
+    </top>
+
+    <!-- CENTER CONTENT (CHARTS AND TABLES) -->
+    <center>
+        <SplitPane orientation="VERTICAL" style="-fx-background-color: transparent; -fx-padding: 0 10 10 10; -fx-box-border: transparent;">
+            
+            <!-- CHARTS SECTION -->
+            <HBox spacing="10" prefHeight="300" minHeight="250">
+                <VBox styleClass="panel" HBox.hgrow="ALWAYS">
+                    <Label text="Login Activity (24H)" styleClass="section-title"/>
+                    <LineChart fx:id="timelineChart" VBox.vgrow="ALWAYS" legendVisible="false">
+                        <xAxis><CategoryAxis/></xAxis>
+                        <yAxis><NumberAxis autoRanging="true"/></yAxis>
+                    </LineChart>
+                </VBox>
+                <VBox styleClass="panel" HBox.hgrow="ALWAYS">
+                    <Label text="Status Distribution" styleClass="section-title"/>
+                    <PieChart fx:id="statusPieChart" VBox.vgrow="ALWAYS"/>
+                </VBox>
+                <VBox styleClass="panel" HBox.hgrow="ALWAYS">
+                    <Label text="Device Types" styleClass="section-title"/>
+                    <BarChart fx:id="deviceChart" VBox.vgrow="ALWAYS" legendVisible="false">
+                        <xAxis><CategoryAxis/></xAxis>
+                        <yAxis><NumberAxis/></yAxis>
+                    </BarChart>
+                </VBox>
+                <VBox styleClass="panel" HBox.hgrow="ALWAYS">
+                    <Label text="Top Active IPs" styleClass="section-title"/>
+                    <BarChart fx:id="ipChart" VBox.vgrow="ALWAYS" legendVisible="false">
+                        <xAxis><CategoryAxis/></xAxis>
+                        <yAxis><NumberAxis/></yAxis>
+                    </BarChart>
+                </VBox>
+            </HBox>
+
+            <!-- DATA TABLES SECTION -->
+            <SplitPane dividerPositions="0.6" style="-fx-background-color: transparent;">
+                
+                <!-- Authentication Logs -->
+                <VBox spacing="10" styleClass="panel">
+                    <HBox alignment="CENTER_LEFT" spacing="15">
+                        <Label text="Authentication Logs" styleClass="section-title" HBox.hgrow="ALWAYS"/>
+                        <Region HBox.hgrow="ALWAYS" />
+                        <!-- Filters -->
+                        <TextField fx:id="filterUserId" promptText="User ID" prefWidth="100"/>
+                        <TextField fx:id="filterIp" promptText="IP Address" prefWidth="130"/>
+                        <ComboBox fx:id="filterStatus" promptText="Any Status" prefWidth="120" />
+                    </HBox>
+                    <TableView fx:id="logsTable" VBox.vgrow="ALWAYS">
+                        <columns>
+                            <TableColumn fx:id="colLogUser" text="User ID" prefWidth="80"/>
+                            <TableColumn fx:id="colLogTime" text="Time" prefWidth="160"/>
+                            <TableColumn fx:id="colLogIp" text="IP Address" prefWidth="130"/>
+                            <TableColumn fx:id="colLogDevice" text="Device" prefWidth="160"/>
+                            <TableColumn fx:id="colLogSuccess" text="Result" prefWidth="80"/>
+                            <TableColumn fx:id="colLogScore" text="Anomaly Score" prefWidth="120"/>
+                        </columns>
+                    </TableView>
+                </VBox>
+
+                <!-- Security Alerts & Risky IPs -->
+                <VBox spacing="10">
+                    <VBox styleClass="panel" VBox.vgrow="ALWAYS" prefHeight="250">
+                        <Label text="Active Security Alerts" styleClass="section-title" textFill="#FF5252"/>
+                        <TableView fx:id="alertsTable" VBox.vgrow="ALWAYS">
+                            <columns>
+                                <TableColumn fx:id="colAlertUser" text="User ID" prefWidth="70"/>
+                                <TableColumn fx:id="colAlertType" text="Type" prefWidth="180"/>
+                                <TableColumn fx:id="colAlertSeverity" text="Severity" prefWidth="90"/>
+                                <TableColumn fx:id="colAlertTime" text="Time" prefWidth="140"/>
+                            </columns>
+                        </TableView>
+                    </VBox>
+                    
+                    <VBox styleClass="panel" VBox.vgrow="ALWAYS">
+                        <Label text="Top Risky IPs" styleClass="section-title" textFill="#FF9800"/>
+                        <TableView fx:id="riskyIpTable" VBox.vgrow="ALWAYS">
+                            <columns>
+                                <TableColumn fx:id="colRiskyIp" text="IP Address" prefWidth="240"/>
+                                <TableColumn fx:id="colRiskyScore" text="Max Threat Score" prefWidth="150"/>
+                            </columns>
+                        </TableView>
+                    </VBox>
+                </VBox>
+
+            </SplitPane>
+        </SplitPane>
+    </center>
+
+</BorderPane>
